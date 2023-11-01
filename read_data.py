@@ -52,3 +52,5 @@ import os
 # np.savez('NYC_test.npz', NYC_test = NYC_test)
 
 fh.makedirs(os.path.join('output','train','sss.npz'))
+
+print("看看能不能上传")
