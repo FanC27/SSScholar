@@ -1,0 +1,100 @@
+{"id": "104", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "BusStation TrainStation HotDogJoint Building"}
+{"id": "635", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Road Arts&CraftsStore Arts&CraftsStore GymFitnessCenter"}
+{"id": "695", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Subway FleaMarket FleaMarket BusStation"}
+{"id": "920", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "DeliBodega Diner DepartmentStore CollegeTheater"}
+{"id": "1387", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "TrainStation Bakery PostOffice MusicStore"}
+{"id": "1473", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Airport Airport Airport Building Airport Airport Airport Building"}
+{"id": "1548", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "TrainStation FleaMarket BusStation SoupPlace"}
+{"id": "1607", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Bank SoupPlace FurnitureHomeStore Home(private)"}
+{"id": "1724", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Church HistoryMuseum Beach HistoryMuseum"}
+{"id": "2606", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "PaperOfficeSuppliesStore HighSchool BurritoPlace Home(private) DrugstorePharmacy Food&DrinkShop"}
+{"id": "3823", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "CoffeeShop Arcade ConcertHall KoreanRestaurant"}
+{"id": "4159", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "DesignStudio Neighborhood GasStationGarage HistoryMuseum ConcertHall Airport"}
+{"id": "4714", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "AmericanRestaurant BusStation PostOffice Cafe Bridge FleaMarket"}
+{"id": "4772", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Taxi Taxi PostOffice CoffeeShop"}
+{"id": "4871", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Synagogue GymFitnessCenter CoffeeShop SoupPlace RamenNoodleHouse BusStation Theater PaperOfficeSuppliesStore"}
+{"id": "5138", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "HarborMarina CoffeeShop Building KoreanRestaurant"}
+{"id": "5502", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "ComedyClub ItalianRestaurant SandwichPlace ThaiRestaurant"}
+{"id": "5577", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "HarborMarina School StudentCenter KoreanRestaurant"}
+{"id": "5864", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Arts&CraftsStore PizzaPlace PostOffice PaperOfficeSuppliesStore"}
+{"id": "5992", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "TrainStation TrainStation TrainStation TrainStation"}
+{"id": "6124", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "LaundryService ConcertHall Mall TrainStation TrainStation TattooParlor"}
+{"id": "6137", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Building Airport Airport LaundryService FleaMarket Airport"}
+{"id": "6268", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "VideoGameStore Bridge Bridge FleaMarket Bridge Bridge"}
+{"id": "6876", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Building Building HarborMarina AntiqueShop"}
+{"id": "6989", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "TrainStation BusStation GymFitnessCenter Food&DrinkShop CubanRestaurant HarborMarina Building Food&DrinkShop TrainStation Bridge JewelryStore PostOffice"}
+{"id": "7519", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Food&DrinkShop Food&DrinkShop Food&DrinkShop Food&DrinkShop Food&DrinkShop JapaneseRestaurant"}
+{"id": "7708", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Church Bridge Church Bridge"}
+{"id": "8634", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Neighborhood TrainStation TrainStation LightRail FleaMarket LightRail"}
+{"id": "9481", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Food&DrinkShop Building LaundryService GreekRestaurant Neighborhood Building"}
+{"id": "9691", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Cemetery Bridge GymFitnessCenter Bridge"}
+{"id": "10548", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Building ConventionCenter School Building Building Building"}
+{"id": "10756", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Building Building Food&DrinkShop Building"}
+{"id": "10816", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Building BusStation TrainStation PostOffice"}
+{"id": "10862", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Arts&CraftsStore Building HousingDevelopment ConcertHall"}
+{"id": "11013", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "EventSpace EventSpace TrainStation SoupPlace CollegeTheater WingsJoint"}
+{"id": "11196", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Market Airport Airport Market Market Airport Airport TrainStation CollegeStadium Home(private)"}
+{"id": "11217", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Airport KoreanRestaurant FinancialorLegalService Market Airport Home(private)"}
+{"id": "12356", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "ConcertHall FleaMarket Mall Bakery"}
+{"id": "12548", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "SoupPlace ConcertHall PublicArt TrainStation"}
+{"id": "12715", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "ConcertHall CoffeeShop KoreanRestaurant CandyStore CandyStore CandyStore CandyStore KoreanRestaurant CoffeeShop Arts&CraftsStore Racetrack Stadium"}
+{"id": "13240", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "FleaMarket LaundryService BusStation PostOffice KoreanRestaurant TrainStation"}
+{"id": "13470", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "FleaMarket RestArea Building FleaMarket TrainStation PostOffice"}
+{"id": "13864", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Food BBQJoint CoffeeShop Bakery"}
+{"id": "13873", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Building Building Building ConcertHall CoffeeShop Building"}
+{"id": "13892", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "CoffeeShop Aquarium Building Building"}
+{"id": "13941", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "PostOffice PostOffice PostOffice CaribbeanRestaurant"}
+{"id": "14129", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "MedicalCenter Distillery GeneralTravel Market"}
+{"id": "15086", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Building Airport Food&DrinkShop Airport"}
+{"id": "15165", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Bridge Airport TrainStation Cafe"}
+{"id": "15213", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "BusStation BusStation ClothingStore WingsJoint"}
+{"id": "15545", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "ChineseRestaurant ChineseRestaurant ChineseRestaurant ChineseRestaurant ChineseRestaurant ChineseRestaurant ChineseRestaurant ChineseRestaurant"}
+{"id": "16138", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "GeneralEntertainment BusStation BusStation BusStation"}
+{"id": "16384", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Building Park School MusicStore"}
+{"id": "16398", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "GymFitnessCenter BusStation BusStation GymFitnessCenter"}
+{"id": "16676", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Airport CoffeeShop CoffeeShop GymFitnessCenter"}
+{"id": "16784", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "GeneralTravel Building Bookstore PostOffice"}
+{"id": "17484", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "CoffeeShop CoffeeShop Home(private) CoffeeShop"}
+{"id": "17916", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "PostOffice CollegeTheater ComedyClub CosmeticsShop"}
+{"id": "17957", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "LawSchool MedicalCenter PostOffice SoupPlace CoffeeShop TeaRoom PostOffice MexicanRestaurant"}
+{"id": "18526", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "TanningSalon Road PostOffice FastFoodRestaurant"}
+{"id": "18700", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "SculptureGarden Building TeaRoom Building"}
+{"id": "18933", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Church PizzaPlace Building Building"}
+{"id": "19000", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "EventSpace Building FleaMarket BusStation"}
+{"id": "19328", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "CoffeeShop FleaMarket PostOffice TrainStation"}
+{"id": "19343", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "ConcertHall TrainStation FleaMarket Bridge TrainStation ConcertHall"}
+{"id": "19679", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Food&DrinkShop LaundryService EventSpace RestArea DessertShop FleaMarket"}
+{"id": "19766", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "GiftShop FleaMarket Synagogue StudentCenter Market EventSpace"}
+{"id": "19767", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "FleaMarket EventSpace School StudentCenter"}
+{"id": "19836", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Bridge FastFoodRestaurant Bank Bridge"}
+{"id": "19933", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Building Bookstore HighSchool KoreanRestaurant LaundryService Building"}
+{"id": "20216", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "GeneralTravel Steakhouse CoffeeShop EventSpace"}
+{"id": "20664", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "FoodTruck FoodTruck PostOffice FoodTruck"}
+{"id": "20697", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "CoffeeShop BBQJoint PostOffice WingsJoint"}
+{"id": "21082", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "TrainStation Airport GymFitnessCenter GymFitnessCenter Building Building"}
+{"id": "21362", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "HarborMarina Bridge HistoryMuseum Neighborhood"}
+{"id": "21784", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "CosmeticsShop FastFoodRestaurant Road TradeSchool"}
+{"id": "22442", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "HotDogJoint SoupPlace ConcertHall Food&DrinkShop LawSchool StorageFacility"}
+{"id": "22465", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "SoupPlace KoreanRestaurant Food&DrinkShop Building"}
+{"id": "22742", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "WingsJoint Building CoffeeShop Arts&CraftsStore"}
+{"id": "22772", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "FoodTruck GymFitnessCenter FoodTruck SandwichPlace"}
+{"id": "23109", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "FinancialorLegalService DrugstorePharmacy Park PetStore"}
+{"id": "23154", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "CoffeeShop Building CoffeeShop RestArea"}
+{"id": "23208", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "BusStation GymFitnessCenter TrainStation Church FleaMarket School"}
+{"id": "23617", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "TrainStation HistoryMuseum HistoryMuseum SoupPlace"}
+{"id": "23739", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Airport Church ThaiRestaurant Diner"}
+{"id": "24110", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "FleaMarket Building FoodTruck CoffeeShop"}
+{"id": "24977", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "RestArea BusStation TrainStation Taxi"}
+{"id": "25049", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "FleaMarket Airport TeaRoom TrainStation BusStation SculptureGarden"}
+{"id": "25072", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "TrainStation Market TeaRoom FleaMarket"}
+{"id": "25104", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "SculptureGarden Airport ConcertHall TrainStation TrainStation TrainStation"}
+{"id": "25111", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "StorageFacility Bookstore Building Airport Airport Airport"}
+{"id": "25497", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Building CosmeticsShop Park JapaneseRestaurant"}
+{"id": "26078", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "HistoryMuseum Airport FleaMarket GymFitnessCenter GeneralTravel HotDogJoint Bookstore Bookstore Bookstore Airport Airport GymFitnessCenter"}
+{"id": "26099", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Airport HistoryMuseum Airport Bookstore CosmeticsShop GeneralTravel"}
+{"id": "26580", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "TrainStation BusStation BusStation BusStation"}
+{"id": "26613", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "BusStation HardwareStore BusStation BusStation"}
+{"id": "26800", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Bookstore CosmeticsShop MovingTarget FleaMarket Airport TrainStation"}
+{"id": "27097", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Food&DrinkShop FastFoodRestaurant SoupPlace Cemetery"}
+{"id": "27166", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "Church Church Bank HotDogJoint"}
+{"id": "27183", "orig": "aclImdb/train/unsup/127_0.txt", "rating": 0, "sentiment": null, "text": "GymFitnessCenter HistoryMuseum CoffeeShop Building"}
