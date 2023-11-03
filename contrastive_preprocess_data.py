@@ -32,6 +32,8 @@ alpha = re.compile('^[a-zA-Z_]+$')
 alpha_or_num = re.compile('^[a-zA-Z_]+|[0-9_]+$')
 alphanum = re.compile('^[a-zA-Z0-9_]+$')
 
+# python preprocess_data.py data/poi/train_file.jsonlist data/poi/processed/ --vocab-size 2000 --test data/poi/test_file.jsonlist
+# python preprocess_data.py data/data_NYC/original_train/NYC_ori_train.jsonlist data/data_NYC/original_train/processed  --pos-train-infile data/data_NYC/positive_train/NYC_pos_train.jsonlist --neg-train-infile data/data_NYC/negative_train/NYC_neg_train.jsonlist --vocab-size 1000 --test data/data_NYC/original_train/NYC_test.jsonlist
 
 def main(args):
     usage = "%prog train.jsonlist output_dir"
@@ -42,6 +44,14 @@ def main(args):
                       help='Test data (test.jsonlist): default=%default')
     parser.add_option('--train-prefix', dest='train_prefix', default='train',
                       help='Output prefix for training data: default=%default')
+    parser.add_option('--pos-train-infile', dest='pos_train_infile', default=None,
+                      help='pos_train_infile path')
+    parser.add_option('--neg-train-infile', dest='neg_train_infile', default=None,
+                      help='neg_train_infile path')
+    parser.add_option('--pos-train-prefix', dest='pos_train_prefix', default='pos_train',
+                      help='Output prefix for pos_training data: default=%default')
+    parser.add_option('--neg-train-prefix', dest='neg_train_prefix', default='neg_train',
+                      help='Output prefix for neg_training data: default=%default')
     parser.add_option('--test-prefix', dest='test_prefix', default='test',
                       help='Output prefix for test data: default=%default')
     parser.add_option('--stopwords', dest='stopwords', default='snowball',
@@ -66,12 +76,15 @@ def main(args):
                       help='Random integer seed (only relevant for choosing test set): default=%default')
 
     (options, args) = parser.parse_args(args)
-
     train_infile = args[0]
     output_dir = args[1]
+    pos_train_infile = options.pos_train_infile
+    neg_train_infile = options.neg_train_infile
 
     test_infile = options.test
     train_prefix = options.train_prefix
+    pos_train_prefix = options.pos_train_prefix
+    neg_train_prefix = options.neg_train_prefix
     test_prefix = options.test_prefix
     label_fields = options.label
     min_doc_count = int(options.min_doc_count)
@@ -92,10 +105,10 @@ def main(args):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    preprocess_data(train_infile, test_infile, output_dir, train_prefix, test_prefix, min_doc_count, max_doc_freq, vocab_size, stopwords, keep_num, keep_alphanum, strip_html, lower, min_length, label_fields=label_fields)
+    preprocess_data(train_infile, pos_train_infile, neg_train_infile, test_infile, output_dir, train_prefix, pos_train_prefix, neg_train_prefix, test_prefix, min_doc_count, max_doc_freq, vocab_size, stopwords, keep_num, keep_alphanum, strip_html, lower, min_length, label_fields=label_fields)
 
 
-def preprocess_data(train_infile, test_infile, output_dir, train_prefix, test_prefix, min_doc_count=0, max_doc_freq=1.0, vocab_size=None, stopwords=None, keep_num=False, keep_alphanum=False, strip_html=False, lower=True, min_length=3, label_fields=None):
+def preprocess_data(train_infile,pos_train_infile, neg_train_infile, test_infile, output_dir, train_prefix, pos_train_prefix, neg_train_prefix, test_prefix, min_doc_count=0, max_doc_freq=1.0, vocab_size=None, stopwords=None, keep_num=False, keep_alphanum=False, strip_html=False, lower=True, min_length=3, label_fields=None):
 
     if stopwords == 'mallet':
         print("Using Mallet stopwords")
@@ -108,35 +121,37 @@ def preprocess_data(train_infile, test_infile, output_dir, train_prefix, test_pr
         stopword_list = fh.read_text(os.path.join('stopwords', stopwords + '_stopwords.txt'))
     else:
         stopword_list = []
-    stopword_set = {s.strip() for s in stopword_list}  # 停词列表
+    stopword_set = {s.strip() for s in stopword_list}
 
+    # 读取原始数据
     print("Reading data files")
-    train_items = fh.read_jsonlist(train_infile)  # 读取训练数据的每一行，存在列表中
-    n_train = len(train_items)  # 获得训练集长度
-    print("Found {:d} training documents".format(n_train))  # 找到n条训练集
-    for line in train_items:
-        # if line["text"].indexof("Caf\x1a\x1a") != -1:
-        str_new = line["text"].replace("Caf\x1a\x1a", "Cafe")
-        line["text"] = str_new
-    # train_items[466153]["text"] = "Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe"
+    train_items = fh.read_jsonlist(train_infile)
+    n_train = len(train_items)
+    print("Found {:d} training documents".format(n_train))
 
+    # 读取正例数据
+    print("Reading positive data files")
+    pos_train_items = fh.read_jsonlist(pos_train_infile)
+    pos_n_train = len(pos_train_items)
+    print("Found {:d} training documents".format(pos_n_train))
 
-    if test_infile is not None:  # 如果存在测试
-        test_items = fh.read_jsonlist(test_infile)  # 读取测试数据的每一行，存在列表中
-        n_test = len(test_items)  # 获得测试集长度
-        for line in test_items:
-            # if line["text"].indexof("Caf\x1a\x1a") != -1:
-            str_new = line["text"].replace("Caf\x1a\x1a", "Cafe")
-            line["text"] = str_new
-        print("Found {:d} test documents".format(n_test))  # 找到n条测试集
+    # 读取负例数据
+    print("Reading negative data files")
+    neg_train_items = fh.read_jsonlist(neg_train_infile)
+    neg_n_train = len(neg_train_items)
+    print("Found {:d} training documents".format(neg_n_train))
+
+    if test_infile is not None:
+        test_items = fh.read_jsonlist(test_infile)
+        n_test = len(test_items)
+        print("Found {:d} test documents".format(n_test))
     else:
-        test_items = []  # 不存在测试集，就为空
+        test_items = []
         n_test = 0
 
-    all_items = train_items + test_items
-    n_items = n_train + n_test
+    all_items = train_items + test_items + pos_train_items + neg_train_items
+    n_items = n_train + n_test + pos_n_train + neg_n_train
 
-    "没有情感标签，不构建"
     label_lists = {}
     if label_fields is not None:
         if ',' in label_fields:
@@ -156,106 +171,104 @@ def preprocess_data(train_infile, test_infile, output_dir, train_prefix, test_pr
     else:
         label_fields = []
 
-    # make vocabulary 构建词表（列表）
+    # make vocabulary
     train_parsed = []
+    pos_train_parsed = []
+    neg_train_parsed = []
     test_parsed = []
 
     print("Parsing %d documents" % n_items)
-    word_counts = Counter()  # 统计单词个数
-    doc_counts = Counter()  # 统计文档个数
+    word_counts = Counter()
+    doc_counts = Counter()
     count = 0
 
     vocab = None
-    for i, item in enumerate(all_items):  # 得到全部数据的索引、数据
+    for i, item in enumerate(all_items):
         if i % 1000 == 0 and count > 0:
             print(i)
-
-        text = item['text']  # 得到每个文档的文本内容
-        '获得当前文本的token列表'
+        
+        text = item['text']
         tokens, _ = tokenize(text, strip_html=strip_html, lower=lower, keep_numbers=keep_num, keep_alphanum=keep_alphanum, min_length=min_length, stopwords=stopword_set, vocab=vocab)
 
         # store the parsed documents
-        if i < n_train:  # 如果是训练数据
-            train_parsed.append(tokens)  # 把该文档的所有token加到列表中
+        if i < n_train:
+            train_parsed.append(tokens)
+        elif n_train <= i < n_train + pos_n_train:
+            pos_train_parsed.append(tokens)
+        elif n_train + pos_n_train <= i < n_train + pos_n_train + neg_n_train:
+            neg_train_parsed.append(tokens)
         else:
             test_parsed.append(tokens)
 
         # keep track fo the number of documents with each word
-        word_counts.update(tokens)  # 所有文档的每个token出现的频次 [a : 3, b : 4, c : 2, d : 6 ...]
-        doc_counts.update(set(tokens))  # 每个单词总共出现在几篇文档中 [a : 1, b : 1, c : 1, d : 1 ...]
+        word_counts.update(tokens)
+        doc_counts.update(set(tokens))
 
-    print("Size of full vocabulary=%d" % len(word_counts))  # 输出：当前所有文档共含有多少不同的词，也就是词表（one-hot向量）
+    print("Size of full vocabulary=%d" % len(word_counts))
 
     print("Selecting the vocabulary")
-    most_common = doc_counts.most_common()  # 对所有词频进行排序，由大到小 每个单词总共出现在几篇文档中
-    words, doc_counts = zip(*most_common)  # 解压，words=单词， doc_counts=单词在不同文档出现的频次
-    doc_freqs = np.array(doc_counts) / float(n_items)  # 该单词出现的文档数 / 所有文档数 = 该单词在一个文档中出现的频率
-    vocab = [word for i, word in enumerate(words) if doc_counts[i] >= min_doc_count and doc_freqs[i] <= max_doc_freq]  # 如果该单词数>0且词频<=1 就放入词表中
-    most_common = [word for i, word in enumerate(words) if doc_freqs[i] > max_doc_freq]  # 频率>1的为0
+    most_common = doc_counts.most_common()
+    words, doc_counts = zip(*most_common)
+    doc_freqs = np.array(doc_counts) / float(n_items)
+    vocab = [word for i, word in enumerate(words) if doc_counts[i] >= min_doc_count and doc_freqs[i] <= max_doc_freq]
+    most_common = [word for i, word in enumerate(words) if doc_freqs[i] > max_doc_freq]
     if max_doc_freq < 1.0:
         print("Excluding words with frequency > {:0.2f}:".format(max_doc_freq), most_common)
 
-    print("Vocab size after filtering = %d" % len(vocab))  # 过滤后的词表长度
+    print("Vocab size after filtering = %d" % len(vocab))
     if vocab_size is not None:
-        if len(vocab) > int(vocab_size):  # 如果所得词表长度>2000
-            vocab = vocab[:int(vocab_size)]  # 只取前两千个词（最高频率的词看作重点）
+        if len(vocab) > int(vocab_size):
+            vocab = vocab[:int(vocab_size)]
 
     vocab_size = len(vocab)
     print("Final vocab size = %d" % vocab_size)
 
-    print("Most common words remaining:", ' '.join(vocab[:10]))  # 出现频率最高的词
-    vocab.sort()  # 按字母进行排序
+    print("Most common words remaining:", ' '.join(vocab[:10]))
+    vocab.sort()
 
     fh.write_to_json(vocab, os.path.join(output_dir, train_prefix + '.vocab.json'))
 
-    """
-    train_X_sage = 所有文档的词频矩阵
-    tr_widx = 词表序号
-    vocab_for_sage = 词表内容
-    """
     train_X_sage, tr_aspect, tr_no_aspect, tr_widx, vocab_for_sage = process_subset(train_items, train_parsed, label_fields, label_lists, vocab, output_dir, train_prefix)
+    pos_train_X_sage, pos_tr_aspect, pos_tr_no_aspect, pos_tr_widx, pos_vocab_for_sage = process_subset(pos_train_items, pos_train_parsed, label_fields, label_lists, vocab, output_dir, pos_train_prefix)
+    neg_train_X_sage, neg_tr_aspect, neg_tr_no_aspect, neg_tr_widx, neg_vocab_for_sage = process_subset(neg_train_items, neg_train_parsed, label_fields, label_lists, vocab, output_dir, neg_train_prefix)
     if n_test > 0:
         test_X_sage, te_aspect, te_no_aspect, _, _= process_subset(test_items, test_parsed, label_fields, label_lists, vocab, output_dir, test_prefix)
 
-    train_sum = np.array(train_X_sage.sum(axis=0))  # [1 * 455] 词表中的词出现的所有次数
+    train_sum = np.array(train_X_sage.sum(axis=0))
     print("%d words missing from training data" % np.sum(train_sum == 0))
+    pos_train_sum = np.array(pos_train_X_sage.sum(axis=0))
+    print("%d words missing from training data" % np.sum(pos_train_sum == 0))
+    neg_train_sum = np.array(neg_train_X_sage.sum(axis=0))
+    print("%d words missing from training data" % np.sum(neg_train_sum == 0))
+    
 
-    if n_test > 0:
-        test_sum = np.array(test_X_sage.sum(axis=0))  # [1 * 455] 词表中的词出现的所有次数
-        print("%d words missing from test data" % np.sum(test_sum == 0))
+    # if n_test > 0:
+    #     test_sum = np.array(test_X_sage.sum(axis=0))
+    #     print("%d words missing from test data" % np.sum(test_sum == 0))
 
-    sage_output = {'tr_data': train_X_sage, 'tr_aspect': tr_aspect, 'widx': tr_widx, 'vocab': vocab_for_sage}  # 存储训练词频，词表等
-    if n_test > 0:
-        sage_output['te_data'] = test_X_sage
-        sage_output['te_aspect'] = te_aspect
-    savemat(os.path.join(output_dir, 'sage_labeled.mat'), sage_output)
-    sage_output['tr_aspect'] = tr_no_aspect
-    if n_test > 0:
-        sage_output['te_aspect'] = te_no_aspect
-    savemat(os.path.join(output_dir, 'sage_unlabeled.mat'), sage_output)
+    # sage_output = {'tr_data': train_X_sage, 'tr_aspect': tr_aspect, 'widx': tr_widx, 'vocab': vocab_for_sage}
+    # if n_test > 0:
+    #     sage_output['te_data'] = test_X_sage
+    #     sage_output['te_aspect'] = te_aspect
+    # savemat(os.path.join(output_dir, 'sage_labeled.mat'), sage_output)
+    # sage_output['tr_aspect'] = tr_no_aspect
+    # if n_test > 0:
+    #     sage_output['te_aspect'] = te_no_aspect
+    # savemat(os.path.join(output_dir, 'sage_unlabeled.mat'), sage_output)
 
     print("Done!")
 
 
 def process_subset(items, parsed, label_fields, label_lists, vocab, output_dir, output_prefix):
-    """
-    对训练数据来说：
-    items=所有的训练数据信息，按行划分
-    parsed=训练文本处理后词的列表
-    label_fields, label_lists = null
-    vocab=全部文档的所有单词组成的词表
-    output_dir=输出的文件夹
-    output_prefix=输出的文件名
-    """
     n_items = len(items)
     vocab_size = len(vocab)
-    vocab_index = dict(zip(vocab, range(vocab_size)))  # 为词表vocab以字典的形式建立索引 [a:0, b:1 ...]
+    vocab_index = dict(zip(vocab, range(vocab_size)))
 
     ids = []
     for i, item in enumerate(items):
         if 'id' in item:
-            ids.append(item['id'])  # 读取id索引
-    if len(ids) != n_items:  # 如果不相同，就重新索引
+            ids.append(item['id'])
+    if len(ids) != n_items:
         ids = [str(i) for i in range(n_items)]
 
     # create a label index using string representations
@@ -281,9 +294,9 @@ def process_subset(items, parsed, label_fields, label_lists, vocab, output_dir, 
             if n_labels == 2:
                 label_vector_df.to_csv(os.path.join(output_dir, output_prefix + '.' + label_field + '_vector.csv'))
 
-    rows = []  # 行
-    cols = []  # 列
-    vals = []  # 值
+    rows = []
+    cols = []
+    vals = []
 
     dat_strings = []
     dat_labels = []
@@ -294,38 +307,38 @@ def process_subset(items, parsed, label_fields, label_lists, vocab, output_dir, 
     word_counter = Counter()
     doc_lines = []
     print("Converting to count representations")
-    for i, words in enumerate(parsed):  # 每一行都是文档的token
+    for i, words in enumerate(parsed):
         # get the vocab indices of words that are in the vocabulary
-        indices = [vocab_index[word] for word in words if word in vocab_index]  # 如果该词在此表中， 得到他的词表索引（把token转化成词表索引）
-        word_subset = [word for word in words if word in vocab_index]  # 词表索引所对应的token内容（与indics一一对应）
+        indices = [vocab_index[word] for word in words if word in vocab_index]
+        word_subset = [word for word in words if word in vocab_index]
 
         counter.clear()
-        counter.update(indices)  # 计算在本文档中，该token的索引出现了几次
+        counter.update(indices)
         word_counter.clear()
-        word_counter.update(word_subset)  # 计算在本文档中，token出现了几次
+        word_counter.update(word_subset)
 
-        if len(counter.keys()) > 0:  # 存在词的话
+        if len(counter.keys()) > 0:
             # udpate the counts
-            mallet_strings.append(str(i) + '\t' + 'en' + '\t' + ' '.join(word_subset))  # '0    en  university college auditorium university university home private'
+            mallet_strings.append(str(i) + '\t' + 'en' + '\t' + ' '.join(word_subset))
 
-            dat_string = str(int(len(counter))) + ' '  # 出现了多少个不重复的词
+            dat_string = str(int(len(counter))) + ' '
             dat_string += ' '.join([str(k) + ':' + str(int(v)) for k, v in zip(list(counter.keys()), list(counter.values()))])
-            dat_strings.append(dat_string)  # '5 432:3 89:1 26:1 202:1 316:1' 出现了多少个不重复的词 出现的词的频率
+            dat_strings.append(dat_string)
 
             # for dat formart, assume just one label is given
             if len(label_fields) > 0:
                 label = items[i][label_fields[-1]]
                 dat_labels.append(str(label_index[str(label)]))
 
-            values = list(counter.values())  # 对词频进行处理
-            rows.extend([i] * len(counter))  # [0, 0, 0, 0, 0]  [1 * 700000]
-            token_indices = sorted(counter.keys())  # 按照索引编号大小进行排序
-            cols.extend(list(token_indices))  # [26, 89, 202, 316, 432] 每个文档的token索引
-            vals.extend([counter[k] for k in token_indices])  # [1, 1, 1, 1, 3] 索引编号对应的值（该token出现了几次）
+            values = list(counter.values())
+            rows.extend([i] * len(counter))
+            token_indices = sorted(counter.keys())
+            cols.extend(list(token_indices))
+            vals.extend([counter[k] for k in token_indices])
 
     # convert to a sparse representation
-    sparse_X = sparse.coo_matrix((vals, (rows, cols)), shape=(n_items, vocab_size)).tocsr()  # 把每个文档的token以及出现的频率转换为矩阵的形式
-    fh.save_sparse(sparse_X, os.path.join(output_dir, output_prefix + '.npz'))  # 输出npz文件 700000 * 455 700000行中的每一行对应一个文档，文档中又有token
+    sparse_X = sparse.coo_matrix((vals, (rows, cols)), shape=(n_items, vocab_size)).tocsr()
+    fh.save_sparse(sparse_X, os.path.join(output_dir, output_prefix + '.npz'))
 
     print("Size of {:s} document-term matrix:".format(output_prefix), sparse_X.shape)
 
@@ -341,7 +354,9 @@ def process_subset(items, parsed, label_fields, label_lists, vocab, output_dir, 
 
     # save output for Jacob Eisenstein's SAGE code:
     #sparse_X_sage = sparse.csr_matrix(X, dtype=float)
-    vocab_for_sage = np.zeros((vocab_size,), dtype=object)  # [455, 0]
+
+    vocab_for_sage = np.zeros((vocab_size,), dtype=np.object0)
+    # vocab_for_sage = np.zeros((vocab_size,), dtype=np.object)
     vocab_for_sage[:] = vocab
 
     # for SAGE, assume only a single label has been given
@@ -357,14 +372,14 @@ def process_subset(items, parsed, label_fields, label_lists, vocab, output_dir, 
 
 
 def tokenize(text, strip_html=False, lower=True, keep_emails=False, keep_at_mentions=False, keep_numbers=False, keep_alphanum=False, min_length=3, stopwords=None, vocab=None):
-    text = clean_text(text, strip_html, lower, keep_emails, keep_at_mentions)  # 清洁文本
-    tokens = text.split()  # 单词列表
+    text = clean_text(text, strip_html, lower, keep_emails, keep_at_mentions)
+    tokens = text.split()
 
-    if stopwords is not None:  # 要对停词做处理
-        tokens = ['_' if t in stopwords else t for t in tokens]  # 如果单词包括停词，则处理成'_'
+    if stopwords is not None:
+        tokens = ['_' if t in stopwords else t for t in tokens]
 
     # remove tokens that contain numbers
-    if not keep_alphanum and not keep_numbers:  # 清除token列表里的所有数字
+    if not keep_alphanum and not keep_numbers:
         tokens = [t if alpha.match(t) else '_' for t in tokens]
 
     # or just remove tokens that contain a combination of letters and numbers
@@ -372,20 +387,20 @@ def tokenize(text, strip_html=False, lower=True, keep_emails=False, keep_at_ment
         tokens = [t if alpha_or_num.match(t) else '_' for t in tokens]
 
     # drop short tokens
-    if min_length > 0:  # 如果最小长度大于0 去除字母个数小于3的单词
+    if min_length > 0:
         tokens = [t if len(t) >= min_length else '_' for t in tokens]
 
     counts = Counter()
 
-    unigrams = [t for t in tokens if t != '_']  # 把所有'_'剔除，只留下token列表
-    counts.update(unigrams)  # 使用字典进行词频计数
+    unigrams = [t for t in tokens if t != '_']
+    counts.update(unigrams)
 
-    if vocab is not None:  # 词表为空
+    if vocab is not None:
         tokens = [token for token in unigrams if token in vocab]
     else:
-        tokens = unigrams  #
+        tokens = unigrams
 
-    return tokens, counts  # 返回当前文本所有token的列表，词频
+    return tokens, counts
 
 
 def clean_text(text, strip_html=False, lower=True, keep_emails=False, keep_at_mentions=False):
